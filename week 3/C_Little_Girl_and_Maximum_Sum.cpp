@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long long n, q;
+    cin >> n >> q;
+    vector<long long> v(n);
+    for(long long i = 0; i < n;i++)
+    {
+        cin >> v[i];
+    }
+    vector<long long> d(n+1);
+    for (long long i = 0; i < q;i++)
+    {
+        long long l, r;
+        cin >> l >> r;
+        l--;
+        r--;
+        d[l]++;
+        d[r+1]--;
+    }
+    for (long long i = 1; i <= n;i++)
+    {
+        d[i] = d[i - 1] + d[i];
+    }
+    sort(v.rbegin(), v.rend());
+    sort(d.rbegin(), d.rend());
+    long long ans = 0;
+    for (long long i = 0; i < n;i++)
+    {
+        ans += (v[i] * d[i]);
+    }
+    cout << ans << endl;
+    return 0;
+}
